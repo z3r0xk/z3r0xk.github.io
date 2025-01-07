@@ -1,7 +1,7 @@
 ---
 title: "My First Bug is RCE via SQL injection!"
 data: 2023-06-22 00:00:00 +0000
-categories: [Web, Critical]
+categories: [Web, Gems]
 tags: [SQLi, web]
 ---
 ## $ whoami
