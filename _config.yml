@@ -19,30 +19,30 @@ title: z3r0xk # the main title
 tagline: Nobody trusts nobody. # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  Here to share what i know
+  Here to share what i know!
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
 url: "https://z3r0xk.github.io"
 
 github:
-  username: github_username # change to your GitHub username
+  username: z3r0xk # change to your GitHub username
 
 twitter:
-  username: z3r0x1k # change to your Twitter username
+  username: z3r01k # change to your Twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Karim Elsayed Taha
-  email: example@domain.com # change to your email address
+  email: karimelsayed0x1@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your Twitter homepage
-    - https://github.com/username # change to your GitHub homepage
+    - https://www.linkedin.com/in/karim-elsayed-a70921250/ # change to your Twitter homepage
+    - https://github.com/z3r0xk # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://x.com/z3r01k
 
 # Site Verification Settings
 webmaster_verifications:
@@ -88,7 +88,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode: # [light | dark]
+theme_mode: # [dark | light]
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
@@ -98,7 +98,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://pbs.twimg.com/profile_images/1872294211753558016/ugV0reW-_400x400.jpg
+avatar: "https://pbs.twimg.com/profile_images/1872294211753558016/ugV0reW-_400x400.jpg"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
