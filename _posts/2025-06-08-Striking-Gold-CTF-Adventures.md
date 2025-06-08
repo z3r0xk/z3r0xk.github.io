@@ -71,13 +71,13 @@ This challenge demonstrated the importance of thorough source code review and un
 
 ## Video Valuables
 
-![Challenge Description](/Imgs/CTF/goldrush/frons/video/challenge.png)
+![Challenge Description](/Imgs/CTF/goldrush/fronsics/video/challenge.png)
 
 ### Initial Investigation
 
 1. The challenge provided two initial files:
-   - A text file containing a forum conversation
-   - A video file (output.avi)
+   - A text file containing a forum conversation (`copy_of_posts.txt`)
+   - A video file (`output.avi`)
 
 2. The forum conversation revealed an interesting exchange:
 
@@ -118,7 +118,7 @@ uhhh oops (⊙_⊙;)
 ### Cracking the Archive
 
 7. The extracted ZIP contained two files:
-   - `1.png` (located in final (1)/New folder)
+   - `1.png`
    - `secrets.7z` (password protected)
 
 8. Initially, I tried to extract potential passwords from `important.jpg` but had no success.
