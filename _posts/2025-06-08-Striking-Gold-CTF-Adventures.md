@@ -55,12 +55,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 'elevate|function|var|function|return'.split('|'),0,{}));
 ```
 
-6. After decoding, I found that I needed to send the following curl command:
-```bash
-curl -X POST http://challenge.com/admin-unlock \
-  -H "Content-Type: application/json" \
-  -d '{"key": "letmein", "username": "z3r0xk"}'
-```
+6. After decoding, I found that I needed to: Send POST to /admin-unlock with body: {{ key: "letmein", username: "<your_username>" }}
 
 ### Striking Gold
 
