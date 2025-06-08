@@ -1,29 +1,31 @@
 ---
 title: "Striking Gold: My Adventures in Goldrush Gauntlet CTF"
 date: 2025-06-08 00:00:00 +0000
-categories: [CTF, Security, Web Challenges]
+categories: [CTF, Web]
 tags: [CTF, Goldrush Gauntlet, Walkthrough, Web Security]
 ---
 
-Welcome to my walkthrough of the Goldrush Gauntlet CTF challenges. In this writeup, I'll be sharing my journey through various security challenges and the techniques used to solve them.
+Welcome to my walkthrough of the Goldrush Gauntlet CTF challenges. In this writeup, I'll be sharing my journey through various web security challenges and the techniques used to solve them.
 
 > **Key Takeaway**: Always examine JavaScript files in web challenges - they often contain crucial information or hints that lead to the solution.
 
-## Web Challenge: Hidden Treasures
+# Web Challenges
 
-![Challenge Description](../Imgs/goldrush-ctf/challenge.png)
+## Hidden Treasures
+
+![Challenge Description](../Imgs/ctf/goldrush/web/challenge.png)
 
 ### Initial Reconnaissance
 
 Upon visiting the challenge URL, we're presented with a simple login page:
 
-![Initial Login Page](../Imgs/goldrush-ctf/1.png)
+![Initial Login Page](../Imgs/ctf/goldrush/web/1.png)
 
 ### The Hunt Begins
 
 1. First, I explored the site's directories and found a registration option. However, it required an invite code:
 
-![Registration Page Requiring Invite Code](../Imgs/goldrush-ctf/6.png)
+![Registration Page Requiring Invite Code](../Imgs/ctf/goldrush/web/6.png)
 
 2. After examining the page source, I discovered an interesting JavaScript file named `inviteapi.min.js`. Its contents were obfuscated:
 
@@ -39,7 +41,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 
 4. Visiting this path provided me with the invite code:
 
-![Invite Code Page](../Imgs/goldrush-ctf/4.png)
+![Invite Code Page](../Imgs/ctf/goldrush/web/4.png)
 
 ### Digging Deeper
 
@@ -53,28 +55,22 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 'elevate|function|var|function|return'.split('|'),0,{}));
 ```
 
-6. After decoding, the message read:
-```
-"Send POST to /admin-unlock with body: {{ key: \"letmein\", username: \"<your_username>\" }}"
+6. After decoding, I found that I needed to send a POST request to `/admin-unlock` with the following JSON body:
+```json
+{
+    "key": "letmein",
+    "username": "<your_username>"
+}
 ```
 
 ### Striking Gold
 
 7. I sent the POST request using curl:
 
-![Curl Request](../Imgs/goldrush-ctf/7.png)
+![Curl Request](../Imgs/ctf/goldrush/web/7.png)
 
 8. Finally, logging back in with my credentials (z3r0xk:123) revealed the flag:
 
-![Flag Obtained](../Imgs/goldrush-ctf/flag.png)
+![Flag Obtained](../Imgs/ctf/goldrush/web/flag.png)
 
-### Key Lessons
-- Always inspect JavaScript files in the source code
-- Pay attention to obfuscated code - it often contains valuable information
-- Use tools like base64 decoder for encoded strings
-- Remember to check for API endpoints mentioned in source code
-
-This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques.
-
----
-*Note: This writeup follows responsible disclosure guidelines. All vulnerabilities discussed were part of the CTF environment.* 
+This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques. 
