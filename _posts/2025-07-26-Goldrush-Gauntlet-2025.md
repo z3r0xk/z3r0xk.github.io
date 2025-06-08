@@ -1,6 +1,6 @@
 ---
 title: "Goldrush Gauntlet 2025: A CTF Walkthrough"
-date: 2025-07-26 00:00:00 +0000
+date: 2025-06-08 00:00:00 +0000
 categories: [CTF, Security]
 tags: [CTF, Goldrush Gauntlet, Walkthrough]
 ---
