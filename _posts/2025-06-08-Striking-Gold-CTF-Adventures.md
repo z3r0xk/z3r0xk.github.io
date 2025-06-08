@@ -13,19 +13,19 @@ Welcome to my walkthrough of the Goldrush Gauntlet CTF challenges. In this write
 
 ## Hidden Treasures
 
-![Challenge Description](/Imgs/ctf/goldrush/web/challenge.png)
+![Challenge Description](/Imgs/CTF/goldrush/web/challenge.png)
 
 ### Initial Reconnaissance
 
 Upon visiting the challenge URL, we're presented with a simple login page:
 
-![Initial Login Page](/Imgs/ctf/goldrush/web/1.png)
+![Initial Login Page](/Imgs/CTF/goldrush/web/1.png)
 
 ### The Hunt Begins
 
 1. First, I explored the site's directories and found a registration option. However, it required an invite code:
 
-![Registration Page Requiring Invite Code](/Imgs/ctf/goldrush/web/6.png)
+![Registration Page Requiring Invite Code](/Imgs/CTF/goldrush/web/6.png)
 
 2. After examining the page source, I discovered an interesting JavaScript file named `inviteapi.min.js`. Its contents were obfuscated:
 
@@ -41,7 +41,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 
 4. Visiting this path provided me with the invite code:
 
-![Invite Code Page](/Imgs/ctf/goldrush/web/4.png)
+![Invite Code Page](/Imgs/CTF/goldrush/web/4.png)
 
 ### Digging Deeper
 
@@ -67,10 +67,10 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 
 7. I sent the POST request using curl:
 
-![Curl Request](/Imgs/ctf/goldrush/web/7.png)
+![Curl Request](/Imgs/CTF/goldrush/web/7.png)
 
 8. Finally, logging back in with my credentials (z3r0xk:123) revealed the flag:
 
-![Flag Obtained](/Imgs/ctf/goldrush/web/flag.png)
+![Flag Obtained](/Imgs/CTF/goldrush/web/flag.png)
 
 This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques. 
