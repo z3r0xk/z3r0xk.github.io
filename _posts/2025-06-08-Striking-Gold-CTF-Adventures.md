@@ -26,10 +26,11 @@ Welcome to my walkthrough of the Goldrush Gauntlet CTF challenges. In this write
 
 2. The forum conversation revealed an interesting exchange:
 
+{% include embed.html url="https://youtu.be/CkmDjbpZu8k" %}
+
 ```text
 johndeerlover9000:
 Let me know what you think about this - i think its pretty sick :-)
-https://youtu.be/CkmDjbpZu8k
 ~ 6120E 4 lyfe
 _____________________________________________________________________________________
 
@@ -45,18 +46,19 @@ uhhh oops (⊙_⊙;)
 
 ### The YouTube Trail
 
-3. Visiting the YouTube link, I found an interesting note in the video description:
+3. Here's what the video looked like:
+
+![Video Screenshot](/Imgs/CTF/goldrush/forensics/video/output.png)
+
+4. In the video description, I found an interesting note:
    ```text
    note to self don't leave this in when I upload
    vasvavgrfgbentrtyvgpu
    ```
 
-4. The text looked encoded. After applying ROT13 decoding:
-   - `vasvavgrfgbentrtyvgpu` → `infinitestorageglitch`
-
 ### Discovering ISG (Infinite Storage Glitch)
 
-5. Research led me to discover that "Infinite Storage Glitch" is a steganography tool specifically designed for hiding files in YouTube videos. The tool allows embedding any file type into a video that can be uploaded to YouTube.
+5. Research led me to discover that ["Infinite Storage Glitch"](https://github.com/DvorakDwarf/Infinite-Storage-Glitch) is a steganography tool specifically designed for hiding files in YouTube videos. The tool allows embedding any file type into a video that can be uploaded to YouTube. For a detailed guide on using ISG, you can refer to [this excellent tutorial](https://techkamar.medium.com/store-any-file-without-storage-limit-using-youtube-and-this-awesome-tool-f2b224f6e6d).
 
 6. After successfully setting up ISG, I was able to extract a ZIP file from the video.
 
