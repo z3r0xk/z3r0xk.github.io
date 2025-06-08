@@ -13,19 +13,19 @@ Welcome to my walkthrough of the Goldrush Gauntlet CTF challenges. In this write
 
 ## Hidden Treasures
 
-![Challenge Description](../Imgs/ctf/goldrush/web/challenge.png)
+![Challenge Description](/Imgs/ctf/goldrush/web/challenge.png)
 
 ### Initial Reconnaissance
 
 Upon visiting the challenge URL, we're presented with a simple login page:
 
-![Initial Login Page](../Imgs/ctf/goldrush/web/1.png)
+![Initial Login Page](/Imgs/ctf/goldrush/web/1.png)
 
 ### The Hunt Begins
 
 1. First, I explored the site's directories and found a registration option. However, it required an invite code:
 
-![Registration Page Requiring Invite Code](../Imgs/ctf/goldrush/web/6.png)
+![Registration Page Requiring Invite Code](/Imgs/ctf/goldrush/web/6.png)
 
 2. After examining the page source, I discovered an interesting JavaScript file named `inviteapi.min.js`. Its contents were obfuscated:
 
@@ -33,7 +33,7 @@ Upon visiting the challenge URL, we're presented with a simple login page:
 eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
     while(c--)d[c]=k[c]||c;k=[function(e){return d[e]}];e=function(){return'\w+'};c=1;}
     while(c--)if(k[c])p=p.replace(new RegExp('\b'+e(c)+'\b','g'),k[c]);return p;}
-('2 0=3(){4\"Use base64 to decode this: L2ludml0ZS8xX21vcmUvY29kZQ==\"}',5,5,
+('2 0=3(){4"Use base64 to decode this: L2ludml0ZS8xX21vcmUvY29kZQ=="}',5,5,
 'generateInvite|function|var|function|return'.split('|'),0,{}));
 ```
 
@@ -41,7 +41,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 
 4. Visiting this path provided me with the invite code:
 
-![Invite Code Page](../Imgs/ctf/goldrush/web/4.png)
+![Invite Code Page](/Imgs/ctf/goldrush/web/4.png)
 
 ### Digging Deeper
 
@@ -51,7 +51,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
     while(c--)d[c]=k[c]||c;k=[function(e){return d[e]}];e=function(){return'\w+'};c=1;}
     while(c--)if(k[c])p=p.replace(new RegExp('\b'+e(c)+'\b','g'),k[c]);return p;}
-('2 0=3(){4\"Fraq CBFG gb /nqzva-haybpx jvgu obql: {{ xrl: \\\"yrgzrva\\\", hfreanzr: \\\"<lbhe_hfreanzr>\\\" }}\"}',5,5,
+('2 0=3(){4"Fraq CBFG gb /nqzva-haybpx jvgu obql: { xrl: \"yrgzrva\", hfreanzr: \"<lbhe_hfreanzr>\" }"}',5,5,
 'elevate|function|var|function|return'.split('|'),0,{}));
 ```
 
@@ -67,10 +67,10 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 
 7. I sent the POST request using curl:
 
-![Curl Request](../Imgs/ctf/goldrush/web/7.png)
+![Curl Request](/Imgs/ctf/goldrush/web/7.png)
 
 8. Finally, logging back in with my credentials (z3r0xk:123) revealed the flag:
 
-![Flag Obtained](../Imgs/ctf/goldrush/web/flag.png)
+![Flag Obtained](/Imgs/ctf/goldrush/web/flag.png)
 
 This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques. 
