@@ -113,13 +113,17 @@ uhhh oops (⊙_⊙;)
 
 5. Research led me to discover that "Infinite Storage Glitch" is a steganography tool specifically designed for hiding files in YouTube videos. The tool allows embedding any file type into a video that can be uploaded to YouTube.
 
+![Video File](/Imgs/CTF/goldrush/fronsics/video/output.avi)
+
 6. After successfully setting up ISG, I was able to extract a ZIP file from the video.
 
 ### Cracking the Archive
 
 7. The extracted ZIP contained two files:
-   - `1.png`
-   - `secrets.7z` (password protected)
+
+![First Image](/Imgs/CTF/goldrush/fronsics/video/1.png)
+
+![Important Image](/Imgs/CTF/goldrush/fronsics/video/important.jpg)
 
 8. Initially, I tried to extract potential passwords from `important.jpg` but had no success.
 
@@ -127,7 +131,9 @@ uhhh oops (⊙_⊙;)
 
 ### Flag Obtained
 
-10. Inside the decrypted archive, I found `videoflag.gif` which contained the flag.
+10. Inside the decrypted archive, I found the flag:
+
+![Flag](/Imgs/CTF/goldrush/fronsics/video/videoflag.gif)
 
 ### Key Lessons
 - Always check video descriptions for hidden information
