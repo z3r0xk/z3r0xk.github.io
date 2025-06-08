@@ -1,13 +1,90 @@
 ---
 title: "Striking Gold: My Adventures in Goldrush Gauntlet CTF"
 date: 2025-06-08 00:00:00 +0000
-categories: [CTF, Web]
-tags: [CTF, Goldrush Gauntlet, Walkthrough, Web Security]
+categories: [CTF, Web, Forensics]
+tags: [CTF, Goldrush Gauntlet, Walkthrough, Web Security, Forensics]
 ---
 
-Welcome to my walkthrough of the Goldrush Gauntlet CTF challenges. In this writeup, I'll be sharing my journey through various web security challenges and the techniques used to solve them.
+Welcome to my walkthrough of the Goldrush Gauntlet CTF challenges. In this writeup, I'll be sharing my journey through various security challenges and the techniques used to solve them.
 
-> **Key Takeaway**: Always examine JavaScript files in web challenges - they often contain crucial information or hints that lead to the solution.
+# Forensics Challenges
+
+## Video Valuables
+
+![Challenge Description](/Imgs/CTF/goldrush/forensics/video/challenge.png)
+
+### Initial Investigation
+
+1. The challenge provided two initial files:
+   - A text file containing a forum conversation (`copy_of_posts.txt`)
+   - A video file (`output.avi`)
+
+<video width="100%" controls>
+  <source src="/Imgs/CTF/goldrush/forensics/video/output.avi" type="video/x-msvideo">
+  Your browser does not support the video tag.
+</video>
+
+2. The forum conversation revealed an interesting exchange:
+
+```text
+johndeerlover9000:
+Let me know what you think about this - i think its pretty sick :-)
+https://youtu.be/CkmDjbpZu8k
+~ 6120E 4 lyfe
+_____________________________________________________________________________________
+
+farmerboi2008:
+Hey man i think you left something visible that you weren't?
+~ M6-101 riderz
+_____________________________________________________________________________________
+
+johndeerlover9000:
+uhhh oops (⊙_⊙;)
+~6120E 4 lyfe
+```
+
+### The YouTube Trail
+
+3. Visiting the YouTube link, I found an interesting note in the video description:
+   ```text
+   note to self don't leave this in when I upload
+   vasvavgrfgbentrtyvgpu
+   ```
+
+4. The text looked encoded. After applying ROT13 decoding:
+   - `vasvavgrfgbentrtyvgpu` → `infinitestorageglitch`
+
+### Discovering ISG (Infinite Storage Glitch)
+
+5. Research led me to discover that "Infinite Storage Glitch" is a steganography tool specifically designed for hiding files in YouTube videos. The tool allows embedding any file type into a video that can be uploaded to YouTube.
+
+6. After successfully setting up ISG, I was able to extract a ZIP file from the video.
+
+### Cracking the Archive
+
+7. The extracted ZIP contained two files:
+
+![First Image](/Imgs/CTF/goldrush/forensics/video/1.png)
+
+![Important Image](/Imgs/CTF/goldrush/forensics/video/important.jpg)
+
+8. Initially, I tried to extract potential passwords from `important.jpg` but had no success.
+
+9. Then I remembered the ROT13 encoded text from the video description - `vasvavgrfgbentrtyvgpu`. Using this as the password for the 7z archive worked!
+
+### Flag Obtained
+
+10. Inside the decrypted archive, I found the flag:
+
+![Flag](/Imgs/CTF/goldrush/forensics/video/videoflag.gif)
+
+### Key Lessons
+- Always check video descriptions for hidden information
+- ROT13 is a common simple encoding method
+- Sometimes the same string can be used multiple times (in this case, as both a clue to the tool and the final password)
+- Steganography in social media platforms is an emerging technique for hiding data
+
+This challenge provided an excellent introduction to steganography and demonstrated how data can be hidden within seemingly normal social media content.
 
 # Web Challenges
 
@@ -67,78 +144,4 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 
 ![Flag Obtained](/Imgs/CTF/goldrush/web/flag.png)
 
-This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques.
-
-## Video Valuables
-
-![Challenge Description](/Imgs/CTF/goldrush/fronsics/video/challenge.png)
-
-### Initial Investigation
-
-1. The challenge provided two initial files:
-   - A text file containing a forum conversation (`copy_of_posts.txt`)
-   - A video file (`output.avi`)
-
-2. The forum conversation revealed an interesting exchange:
-
-```text
-johndeerlover9000:
-Let me know what you think about this - i think its pretty sick :-)
-https://youtu.be/CkmDjbpZu8k
-~ 6120E 4 lyfe
-_____________________________________________________________________________________
-
-farmerboi2008:
-Hey man i think you left something visible that you weren't?
-~ M6-101 riderz
-_____________________________________________________________________________________
-
-johndeerlover9000:
-uhhh oops (⊙_⊙;)
-~6120E 4 lyfe
-```
-
-### The YouTube Trail
-
-3. Visiting the YouTube link, I found an interesting note in the video description:
-   ```text
-   note to self don't leave this in when I upload
-   vasvavgrfgbentrtyvgpu
-   ```
-
-4. The text looked encoded. After applying ROT13 decoding:
-   - `vasvavgrfgbentrtyvgpu` → `infinitestorageglitch`
-
-### Discovering ISG (Infinite Storage Glitch)
-
-5. Research led me to discover that "Infinite Storage Glitch" is a steganography tool specifically designed for hiding files in YouTube videos. The tool allows embedding any file type into a video that can be uploaded to YouTube.
-
-![Video File](/Imgs/CTF/goldrush/fronsics/video/output.avi)
-
-6. After successfully setting up ISG, I was able to extract a ZIP file from the video.
-
-### Cracking the Archive
-
-7. The extracted ZIP contained two files:
-
-![First Image](/Imgs/CTF/goldrush/fronsics/video/1.png)
-
-![Important Image](/Imgs/CTF/goldrush/fronsics/video/important.jpg)
-
-8. Initially, I tried to extract potential passwords from `important.jpg` but had no success.
-
-9. Then I remembered the ROT13 encoded text from the video description - `vasvavgrfgbentrtyvgpu`. Using this as the password for the 7z archive worked!
-
-### Flag Obtained
-
-10. Inside the decrypted archive, I found the flag:
-
-![Flag](/Imgs/CTF/goldrush/fronsics/video/videoflag.gif)
-
-### Key Lessons
-- Always check video descriptions for hidden information
-- ROT13 is a common simple encoding method
-- Sometimes the same string can be used multiple times (in this case, as both a clue to the tool and the final password)
-- Steganography in social media platforms is an emerging technique for hiding data
-
-This challenge provided an excellent introduction to steganography and demonstrated how data can be hidden within seemingly normal social media content. 
+This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques. 
