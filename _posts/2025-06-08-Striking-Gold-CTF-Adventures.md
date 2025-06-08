@@ -67,4 +67,72 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 
 ![Flag Obtained](/Imgs/CTF/goldrush/web/flag.png)
 
-This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques. 
+This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques.
+
+## Video Valuables
+
+![Challenge Description](/Imgs/CTF/goldrush/frons/video/challenge.png)
+
+### Initial Investigation
+
+1. The challenge provided two initial files:
+   - A text file containing a forum conversation
+   - A video file (output.avi)
+
+2. The forum conversation revealed an interesting exchange:
+
+```text
+johndeerlover9000:
+Let me know what you think about this - i think its pretty sick :-)
+https://youtu.be/CkmDjbpZu8k
+~ 6120E 4 lyfe
+_____________________________________________________________________________________
+
+farmerboi2008:
+Hey man i think you left something visible that you weren't?
+~ M6-101 riderz
+_____________________________________________________________________________________
+
+johndeerlover9000:
+uhhh oops (⊙_⊙;)
+~6120E 4 lyfe
+```
+
+### The YouTube Trail
+
+3. Visiting the YouTube link, I found an interesting note in the video description:
+   ```text
+   note to self don't leave this in when I upload
+   vasvavgrfgbentrtyvgpu
+   ```
+
+4. The text looked encoded. After applying ROT13 decoding:
+   - `vasvavgrfgbentrtyvgpu` → `infinitestorageglitch`
+
+### Discovering ISG (Infinite Storage Glitch)
+
+5. Research led me to discover that "Infinite Storage Glitch" is a steganography tool specifically designed for hiding files in YouTube videos. The tool allows embedding any file type into a video that can be uploaded to YouTube.
+
+6. After successfully setting up ISG, I was able to extract a ZIP file from the video.
+
+### Cracking the Archive
+
+7. The extracted ZIP contained two files:
+   - `1.png` (located in final (1)/New folder)
+   - `secrets.7z` (password protected)
+
+8. Initially, I tried to extract potential passwords from `important.jpg` but had no success.
+
+9. Then I remembered the ROT13 encoded text from the video description - `vasvavgrfgbentrtyvgpu`. Using this as the password for the 7z archive worked!
+
+### Flag Obtained
+
+10. Inside the decrypted archive, I found `videoflag.gif` which contained the flag.
+
+### Key Lessons
+- Always check video descriptions for hidden information
+- ROT13 is a common simple encoding method
+- Sometimes the same string can be used multiple times (in this case, as both a clue to the tool and the final password)
+- Steganography in social media platforms is an emerging technique for hiding data
+
+This challenge provided an excellent introduction to steganography and demonstrated how data can be hidden within seemingly normal social media content. 
