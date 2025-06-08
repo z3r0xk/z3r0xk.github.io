@@ -1,71 +1,80 @@
 ---
-title: "⛏️ Striking Gold: My Adventures in Goldrush Gauntlet CTF"
+title: "Striking Gold: My Adventures in Goldrush Gauntlet CTF"
 date: 2025-06-08 00:00:00 +0000
-categories: [CTF, Security]
-tags: [CTF, Goldrush Gauntlet, Walkthrough, Hacking]
+categories: [CTF, Security, Web Challenges]
+tags: [CTF, Goldrush Gauntlet, Walkthrough, Web Security]
 ---
 
-![Mining for CTF Gold](https://media.giphy.com/media/q09as1hSQTyhEtpfoF/giphy.gif)
+Welcome to my walkthrough of the Goldrush Gauntlet CTF challenges. In this writeup, I'll be sharing my journey through various security challenges and the techniques used to solve them.
 
-Hey fellow security enthusiasts! 🎮 Today, I'm super excited to share my journey through the Goldrush Gauntlet 2025 CTF. Grab your pickaxes and put on your hacker hats - we're going mining for some serious security knowledge! 🪙
+> **Key Takeaway**: Always examine JavaScript files in web challenges - they often contain crucial information or hints that lead to the solution.
 
-## 🗺️ The Adventure Map
+## Web Challenge: Hidden Treasures
 
-Before we dive into the challenges, here's what we'll be exploring:
-- Web Exploitation
-- Cryptography
-- Reverse Engineering
-- And more surprises along the way!
+![Challenge Description](../Imgs/goldrush-ctf/challenge.png)
 
-## ⚔️ Challenge 1: [Challenge Name]
+### Initial Reconnaissance
 
-### The Scene 🎭
-[Set the stage with the challenge description]
+Upon visiting the challenge URL, we're presented with a simple login page:
 
-### The Hunt 🔍
-[Detail your approach and methodology]
+![Initial Login Page](../Imgs/goldrush-ctf/1.png)
 
-### Striking Gold 🏆
-[Share your solution and the flag]
+### The Hunt Begins
 
-### Lessons Learned 📝
-[What did this challenge teach you?]
+1. First, I explored the site's directories and found a registration option. However, it required an invite code:
 
-## 🛡️ Challenge 2: [Challenge Name]
+![Registration Page Requiring Invite Code](../Imgs/goldrush-ctf/6.png)
 
-### The Scene 🎭
-[Set the stage with the challenge description]
+2. After examining the page source, I discovered an interesting JavaScript file named `inviteapi.min.js`. Its contents were obfuscated:
 
-### The Hunt 🔍
-[Detail your approach and methodology]
+```javascript
+eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
+    while(c--)d[c]=k[c]||c;k=[function(e){return d[e]}];e=function(){return'\w+'};c=1;}
+    while(c--)if(k[c])p=p.replace(new RegExp('\b'+e(c)+'\b','g'),k[c]);return p;}
+('2 0=3(){4\"Use base64 to decode this: L2ludml0ZS8xX21vcmUvY29kZQ==\"}',5,5,
+'generateInvite|function|var|function|return'.split('|'),0,{}));
+```
 
-### Striking Gold 🏆
-[Share your solution and the flag]
+3. The file contained a base64 encoded string. Decoding it revealed a path: `/invite/1_more/code`
 
-### Lessons Learned 📝
-[What did this challenge teach you?]
+4. Visiting this path provided me with the invite code:
 
-## 🏹 Challenge 3: [Challenge Name]
+![Invite Code Page](../Imgs/goldrush-ctf/4.png)
 
-### The Scene 🎭
-[Set the stage with the challenge description]
+### Digging Deeper
 
-### The Hunt 🔍
-[Detail your approach and methodology]
+5. After creating an account and logging in, I continued examining the source code and found another JavaScript file: `adminapi.min.js`:
 
-### Striking Gold 🏆
-[Share your solution and the flag]
+```javascript
+eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
+    while(c--)d[c]=k[c]||c;k=[function(e){return d[e]}];e=function(){return'\w+'};c=1;}
+    while(c--)if(k[c])p=p.replace(new RegExp('\b'+e(c)+'\b','g'),k[c]);return p;}
+('2 0=3(){4\"Fraq CBFG gb /nqzva-haybpx jvgu obql: {{ xrl: \\\"yrgzrva\\\", hfreanzr: \\\"<lbhe_hfreanzr>\\\" }}\"}',5,5,
+'elevate|function|var|function|return'.split('|'),0,{}));
+```
 
-### Lessons Learned 📝
-[What did this challenge teach you?]
+6. After decoding, the message read:
+```
+"Send POST to /admin-unlock with body: {{ key: \"letmein\", username: \"<your_username>\" }}"
+```
 
-## 🎯 Final Thoughts
+### Striking Gold
 
-This CTF was an incredible journey filled with challenging puzzles and valuable learning experiences. Each challenge was like mining for precious gems of knowledge, and the satisfaction of solving them was pure gold! 
+7. I sent the POST request using curl:
 
-Remember: In CTFs, as in real security work, persistence and creativity are your best tools. Keep digging, keep learning, and keep having fun! 
+![Curl Request](../Imgs/goldrush-ctf/7.png)
 
-Happy hacking! 🚀
+8. Finally, logging back in with my credentials (z3r0xk:123) revealed the flag:
+
+![Flag Obtained](../Imgs/goldrush-ctf/flag.png)
+
+### Key Lessons
+- Always inspect JavaScript files in the source code
+- Pay attention to obfuscated code - it often contains valuable information
+- Use tools like base64 decoder for encoded strings
+- Remember to check for API endpoints mentioned in source code
+
+This challenge demonstrated the importance of thorough source code review and understanding of common web security concepts like authentication bypass techniques.
 
 ---
 *Note: This writeup follows responsible disclosure guidelines. All vulnerabilities discussed were part of the CTF environment.* 
