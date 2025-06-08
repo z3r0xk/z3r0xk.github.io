@@ -55,7 +55,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){
 'elevate|function|var|function|return'.split('|'),0,{}));
 ```
 
-6. After decoding, I found that I needed to: Send POST to /admin-unlock with body: {{ key: "letmein", username: "<your_username>" }}
+6. After decoding, I found that I needed to: `Send POST to /admin-unlock with body: { key: "letmein", username: "<your_username>" }`
 
 ### Striking Gold
 
